@@ -1,0 +1,334 @@
+@font-face {
+	font-family: 'proxima_nova_rgregular';
+	src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot');
+	src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.woff') format('woff'),
+		 url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.ttf') format('truetype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'proxima_nova_rgbold';
+	src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot');
+	src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.woff') format('woff'),
+		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.ttf') format('truetype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'adelle_rgregular';
+	src: url('https://litmus.com/fonts/Emails/adelle_reg-webfont.eot');
+	src: url('https://litmus.com/fonts/Emails/adelle_reg-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('https://litmus.com/fonts/Emails/adelle_reg-webfont.woff') format('woff'),
+		 url('https://litmus.com/fonts/Emails/adelle_reg-webfont.ttf') format('truetype'),
+		 url('https://litmus.com/fonts/Emails/adelle_reg-webfont.svg#adelle_rgregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html, body{
+   height: 100%;
+   font-family: 'proxima_nova_rgregular', Helvetica, Arial, sans-serif;
+}
+body{
+  background-image: url("../assets/bg.png");
+  background-size: cover;
+}
+
+#sideBardata::-webkit-scrollbar {
+  width: 3px;
+  height: 0px;
+  overflow-x: hidden;
+}
+ 
+#sideBardata::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+ 
+#sideBardata::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    margin: 50px;
+  }
+
+  .form-container {
+    background-image: url("../assets/panel.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 40%;
+    padding-top: 35%; /* 16:9 Aspect Ratio */
+  }
+  
+  .form-inner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 10%;
+  }
+
+  .form-inner form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  #form1 label, #form2 label{
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  #form1 input[type=text]{
+    height: 50%;
+    border:  2px solid aqua;
+    background: transparent;
+    border-radius: 0px;
+    margin-bottom: 5%;
+  }
+
+ #form2 input[type=text]{
+    height: 50%;
+    border:  2px solid aqua;
+    background: transparent;
+    border-radius: 0px;
+    margin-bottom: 5%;
+    color: #ccc;
+  }
+
+  #form1 button[type=submit], #form2 button[type=submit]{
+    width: 50%;
+    background:transparent;
+    border: none;
+    background-image: url('../assets/button.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #0f1050;
+    font-weight: bolder;
+    font-size: 1.7vw;
+    align-self: center;
+  }
+
+  #form2 button[type=submit]{
+    width: 100%;
+  }
+
+  #form1 label, #form2 label{
+    font-size: 1.2vw;
+  }
+
+  .box-container {
+    perspective: 900px;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(-23deg) rotateY(35deg);
+    transition: transform 0.5s;
+  }
+
+  /* The animation code */
+  @keyframes rotation {
+    0% {transform: rotateY(360deg) rotateX(-10deg) rotateZ(0deg);}
+    50% {transform: rotateY(180deg) rotateX(10deg) rotateZ(10deg);}
+    100% {transform: rotateY(0deg) rotateX(-10deg) rotateZ(0deg);}
+  }
+
+   .rotate{
+    animation-name: rotation;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+   }
+  /* 3D box sides */
+  .box-front,
+  .box-back,
+  .box-right,
+  .box-left,
+  .box-top,
+  .box-bottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .box-front {
+    transform: translateZ(40px);
+    background: linear-gradient(45deg, #ff8a00, #ff5e03);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 30px 0px;
+  }
+
+   .box-back {
+    transform: rotateY(180deg) translateZ(40px);
+    background: linear-gradient(45deg, #ff5e03, #ff8a00);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+   .box-right {
+    transform: rotateY(90deg) translateZ(40px);
+    background: linear-gradient(45deg, #c44000, #ff8a00);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+   .box-left {
+    transform: rotateY(-90deg) translateZ(40px);
+    background: linear-gradient(45deg, #c44000, #ff8a00);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+   .box-top {
+    transform: rotateX(90deg) translateZ(40px);
+    background: linear-gradient(45deg, #ff8a00, #ff5e03);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+   .box-bottom {
+    transform: rotateX(-90deg) translateZ(40px);
+    background: linear-gradient(45deg, #ff8a00, #ff5e03);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+   .info-section {
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 30%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -30%;
+    z-index: 9999;
+    transition: right 0.5s;
+    background-image: url('../assets/sidebar.png');
+    background-size: cover;
+    overflow: scroll;
+  }
+
+   .info-section.active {
+    right: 0;
+  }
+
+  #all-boxes {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    padding: 0px 150px;
+  }
+
+  #data img{
+    height: 90%;
+    width: 10%;
+  }
+
+  #data{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+
+  #containerMd{
+   display: flex;
+   justify-content: space-around;
+   height: 30%;
+   width: 100%;
+  }
+
+  #containerLg{
+    background-image: url('../assets/box.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 70%; /* (img-height / img-width * container-width) */
+                /* (853 / 1280 * 100) */
+    padding: 10%;
+    padding-left: 15%;
+    margin-top: 5%;
+    overflow-wrap: break-word;
+  }
+
+  #containerLg h4{
+    font-size: 1.6vw;
+  }
+
+  #info-title{
+    background-image: url('../assets/title.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 0%; 
+    width: 100%;
+    height: 20%;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #info-title h3, #info-validation h3{
+    margin-bottom: 0;
+    font-size: 2vw;
+  }
+
+  #info-data{
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #info-validation{
+    padding:10%;
+   }
+   #info-validation h4{
+    font-size: 1vw;
+   }
+   #info-validation{
+    padding:10%;
+   }
+
+  #senderData, #receiverData, #amountData, #hash{
+    color: #fff;
+    font-size: 1vw;
+  }
+
+  .info-section::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+    overflow-x: hidden;
+  }
+   
+  .info-section::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+   
+  .info-section::-webkit-scrollbar-thumb {
+    background-color: rgb(4, 240, 220);
+    outline: 1px solid slategrey;
+  }

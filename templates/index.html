@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Intorduction to Block</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{ '/static/css/style.css' }}" />
+	</head>
+
+	<body>
+		<div class="container-fluid d-flex justify-content-center align-items-center p-5 h-100">
+			<div class="form-container">
+				<div class="form-inner">
+				<form action="{{url_for('home', form ='f1')}}" method="post" id="form1" >
+					<div class="form-group">
+						<label>Sender:</label>
+						<input type="text" name="sender" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>Receiver:</label>
+						<input type="text" name="receiver" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>Amount:</label>
+						<input type="text" name="amount" class="form-control" />
+					</div>
+					<button type="submit" class="btn">SEND</button>
+				</form>
+				</div>
+			</div>
+
+			<div id="all-boxes">
+				{% if blockData %}
+				<div class="box-container">
+					<div
+						class="box"
+						onmousedown="startDrag(event)"
+						onmousemove="drag(event)"
+						onmouseup="endDrag(event)"
+						onclick="toggleInfoSection(0)">
+						<div class="box-front">Block 1</div>
+						<div class="box-back"></div>
+						<div class="box-right"></div>
+						<div class="box-left"></div>
+						<div class="box-top"></div>
+						<div class="box-bottom"></div>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+
+			<div class="info-section text-white " id="infoSection">
+				{% if blockData %}
+				<div id="info-title" >
+					<h3 >Block Data</h3>
+				</div>
+				<div id="info-data">
+					<div id="containerMd">
+						<div id="data">
+							<div id="senderData">
+								<img src="../static/assets/sender.png"> Sender: {{ blockData["sender"] }}
+							</div>
+							<div id="receiverData">
+								<img src="../static/assets/receiver.png"> Receiver: {{ blockData["receiver"] }}
+							</div>
+							<div id="amountData">
+								<img src="../static/assets/amount.png"> Amount: {{blockData["amount"]}}
+							</div>
+						</div>
+						<div class="box-container">
+							<div class="box rotate">
+								<div class="box-front">Block</div>
+								<div class="box-back"></div>
+								<div class="box-right"></div>
+								<div class="box-left"></div>
+								<div class="box-top"></div>
+								<div class="box-bottom"></div>
+							</div>
+						</div>
+					</div>
+					<div id="containerLg">
+						<h4>Hashed Data:</h4>
+						<div id="senderData">Sender: {{ encryptedData["sender"] }}</div>
+						<div id="receiverData">Receiver: {{ encryptedData["receiver"] }}</div>
+						<div id="amountData">Amount: {{encryptedData["amount"]}}</div>
+						<div id="hash">Hash: {{encryptedData["hash"]}}</div>
+						
+					</div>
+				</div>	
+				<div id="info-validation">
+					<h3>Block Validation</h3>
+					<div class="form-container2">
+					<form action="{{url_for('home', form='f2')}}" method="post" id="form2">
+						<div class="form-group">
+							<label>Sender:</label>
+							<input type="text" name="sender" class="form-control" />
+						</div>
+						<div class="form-group">
+							<label>Receiver:</label>
+							<input type="text" name="receiver" class="form-control" />
+						</div>
+						<div class="form-group">
+							<label>Amount:</label>
+							<input type="text" name="amount" class="form-control" />
+						</div>
+						<div class="form-group">
+							<label>Hash:</label>
+							<input type="text" name="hash" class="form-control" />
+						</div>
+						{% if blockData %}
+						<input type="text" value="{{ blockData['sender'] }}" class="d-none"/>
+						<input type="text" value="{{ blockData['receiver'] }}" class="d-none"/>
+						<input type="text" value="{{ blockData['amount'] }}" class="d-none"/>
+						{% endif %}
+						<div class="form-group" style="align-items:center ;">
+							<button type="submit" class="btn">Validate</button>
+						</div>
+					</form>
+					</div>
+					<br>
+					{% if validation %}
+					<div >Hash Validation: {{ validation['message'] }}</div>
+					<div >Block Hash: {{ validation['blockHash'] }}</div>
+					<div >Validation hash: {{ validation['validationHash'] }}</div>
+					{% endif %}
+
+				</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<script>
+			var isDragging = false;
+
+			var xAngle = 0;
+			var yAngle = 0;
+
+			data = [];
+
+			function startDrag(event) {
+				isDragging = true;
+			}
+
+			function drag(event) {
+				if (isDragging) {
+					var dragX =
+						event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+					var dragY =
+						event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+					yAngle += dragX * 0.5;
+					xAngle -= dragY * 0.5;
+					updateRotation();
+				}
+			}
+
+			function endDrag(event) {
+				isDragging = false;
+			}
+
+			function updateRotation() {
+				var box = document.querySelector('.box');
+				box.style.transform =
+					'rotateX(' + xAngle + 'deg) rotateY(' + yAngle + 'deg)';
+			}
+
+			function toggleInfoSection(id) {
+				var infoSection = document.getElementById('infoSection');
+				infoSection.classList.toggle('active');
+			}
+		</script>
+	</body>
+</html>
